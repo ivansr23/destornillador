@@ -15,6 +15,7 @@ public class App {
         System.out.println(prueba.desatornillar());
 
         Destornillador<Puntas> punta = new Destornillador();
-
+        Puntas puntaa = Puntas.builder().dimension(3.6).materia("acero").build();
+        prueba.cambiarPunta(puntaa);
     }
 }

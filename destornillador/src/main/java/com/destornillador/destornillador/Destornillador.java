@@ -1,6 +1,6 @@
 package com.destornillador.destornillador;
 
-public class Destornillador<T> {
+public class Destornillador<T extends Puntas> {
     private T punta;
 
     public Destornillador() {
