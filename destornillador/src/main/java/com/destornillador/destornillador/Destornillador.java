@@ -13,6 +13,9 @@ public class Destornillador<T> {
 		return objeto.getClass().getSimpleName() +" estoy desatornillando";
 	}
 	public String atornillar() {
+		if(objeto==null) {
+			return "No tengo punta";
+		}
 		return objeto.getClass().getSimpleName() +" estoy atornillando";
 	}
 	public String tipoDePunta() {
