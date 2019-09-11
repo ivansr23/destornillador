@@ -15,4 +15,10 @@ public class Destornillador<T> {
 	public String atornillar() {
 		return objeto.getClass().getSimpleName() +" estoy atornillando";
 	}
+	public String tipoDePunta() {
+		if(objeto == null) {
+			return null;
+		}
+		return objeto.getClass().getSimpleName();
+	}
 }
