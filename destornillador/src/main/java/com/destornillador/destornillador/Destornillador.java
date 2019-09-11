@@ -27,6 +27,8 @@ public class Destornillador<T> {
     }
 
     public String tipoDePunta() {
-        return punta.getClass().getSimpleName();
+    	if(punta != null)
+    		return punta.getClass().getSimpleName();
+    	return null;
     }
 }
