@@ -12,16 +12,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,15 +25,16 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(JUnitParamsRunner.class)
 public class TestDestornillador {
     private static Destornillador<Puntas> destornillador;
     @Rule
-    public   TestName testName = new TestName();
-
+    public TestName testName = new TestName();
 
     @Before
-    public  void setup() throws Exception {
+    public void setup() throws Exception {
         System.out.println("Este es el nombre del test '" + testName.getMethodName() + "'");
         destornillador = new Destornillador<Puntas>();
     }
@@ -82,11 +79,11 @@ public class TestDestornillador {
     public void noTienePuntaTest() {
         assertThat(destornillador.tipoDePunta()).isNull();
     }
-    
-    public List<Puntas> crearListaPuntas() throws IOException{
-    	RecogerDatosJson datos = new RecogerDatosJson();
+
+    public List<Puntas> crearListaPuntas() throws IOException {
+        RecogerDatosJson datos = new RecogerDatosJson();
         List<Puntas> puntas = new ArrayList<Puntas>();
-    	puntas.add(new Estrella());
+        puntas.add(new Estrella());
         puntas.add(new Plano());
         Collection<Class<?>> clases = new ArrayList<Class<?>>();
         clases.add(Estrella.class);

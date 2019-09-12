@@ -22,8 +22,9 @@ public class RecogerDatosJson {
         mapper.registerSubtypes(clases);;
         mapper.writeValue(fichero, objetos);
     }
-    public <T> List<T> devolverObjetos(TypeReference<List<T>> hola) throws JsonParseException, JsonMappingException, IOException{	
-    	 List<T> objetos = mapper.readValue(fichero, hola);
+    public <T> List<T> devolverObjetos(TypeReference<List<T>> tipo) throws JsonParseException, JsonMappingException, IOException{	
+    	 List<T> objetos = mapper.readValue(fichero, tipo);
     	 return objetos;
     }
+	
 }
