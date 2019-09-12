@@ -12,19 +12,23 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class RecogerDatosJson {
-	public String directory = System.getProperty("user.home");
-	public String fileName = "puntas.json";
-	public String absolutePath = directory + File.separator + fileName;
-	public ObjectMapper mapper = new ObjectMapper();
+    public String directory = System.getProperty("user.home");
+    public String fileName = "puntas.json";
+    public String absolutePath = directory + File.separator + fileName;
+    public ObjectMapper mapper = new ObjectMapper();
     public File fichero = new File(absolutePath);
-    
-    public <T> void escribirEnJson(List<T> objetos, Collection<Class<?>> clases) throws JsonGenerationException, JsonMappingException, IOException{
-        mapper.registerSubtypes(clases);;
+
+    public <T> void escribirEnJson(List<T> objetos, Collection<Class<?>> clases)
+            throws JsonGenerationException, JsonMappingException, IOException {
+        mapper.registerSubtypes(clases);
+        ;
         mapper.writeValue(fichero, objetos);
     }
-    public <T> List<T> devolverObjetos(TypeReference<List<T>> tipo) throws JsonParseException, JsonMappingException, IOException{	
-    	 List<T> objetos = mapper.readValue(fichero, tipo);
-    	 return objetos;
+
+    public <T> List<T> devolverObjetos(TypeReference<List<T>> tipo)
+            throws JsonParseException, JsonMappingException, IOException {
+        List<T> objetos = mapper.readValue(fichero, tipo);
+        return objetos;
     }
-	
+
 }
