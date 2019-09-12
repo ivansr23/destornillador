@@ -21,7 +21,13 @@ public class Destornillador<T extends Puntas> {
         else
             System.out.println("No es un tipo Punta..");
     }
-
+ 
+    
+    public static <T> T hola(T objeto) {
+    	T hola = objeto;
+    	return hola;
+    }
+    
     public String desatornillar() {
         if( punta != null)
             return punta.getClass().getSimpleName() + " estoy desatornillando";

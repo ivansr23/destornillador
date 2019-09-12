@@ -20,4 +20,8 @@ public @Data class Puntas {
     @JsonProperty
     private String materia;
 
+    public static <Z> Z hola(Z objeto) {
+    	Z hola = objeto;
+    	return hola;
+    }
 }
