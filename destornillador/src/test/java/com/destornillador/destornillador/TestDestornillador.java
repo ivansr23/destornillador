@@ -2,7 +2,9 @@ package com.destornillador.destornillador;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -18,6 +20,7 @@ import org.junit.runner.RunWith;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RunWith(JUnitParamsRunner.class)
@@ -41,37 +44,30 @@ public class TestDestornillador {
         //assertThat(destornillador.tipoDePunta()).isEqualTo("Estrella");
     }
 
-    private Object[] parametersToTestAdd() throws IOException {
+    private Object[] parametersToTestAdd() throws  IOException  {
        
-        List<Puntas> puntas = new ArrayList<Puntas>();
-        
-       // Puntas punta = new Estrella();
-        //Puntas punta2 = new Estrella();
-        puntas.add(new Estrella());
-        puntas.add(new Plano());
-        String directory = System.getProperty("user.home");
-        String fileName = "puntas.json";
-        String absolutePath = directory + File.separator + fileName;
-
-        ObjectMapper mapper = new ObjectMapper();
-        File fichero = new File(absolutePath);
-
-    
-        
-        mapper.registerSubtypes(Estrella.class, Plano.class);
-        mapper.writeValue(fichero, puntas);
-
-        List<Puntas> o = mapper.readValue(fichero, new TypeReference<List<Puntas>>() {
-        });
+       List<Puntas> puntasDev = crearListaPuntas();
         //List<Puntas> puntas = App.mapper.readValue(App.fichero,new TypeReference<List<Puntas>>() {});
         return new Object[] {
-                o
+                puntasDev
         };
     }
 
     @Test
     public void noTienePuntaTest() {
         assertThat(destornillador.tipoDePunta()).isNull();
+    }
+    
+    public List<Puntas> crearListaPuntas() throws IOException{
+    	RecogerDatosJson datos = new RecogerDatosJson();
+        List<Puntas> puntas = new ArrayList<Puntas>();
+    	puntas.add(new Estrella());
+        puntas.add(new Plano());
+        Collection<Class<?>> clases = new ArrayList<Class<?>>();
+        clases.add(Estrella.class);
+        clases.add(Plano.class);
+        datos.escribirEnJson(puntas,clases);
+        return datos.devolverPuntas();
     }
 
 }
