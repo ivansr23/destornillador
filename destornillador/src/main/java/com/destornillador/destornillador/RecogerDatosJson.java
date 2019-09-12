@@ -2,7 +2,6 @@ package com.destornillador.destornillador;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,8 +22,8 @@ public class RecogerDatosJson {
         mapper.registerSubtypes(clases);;
         mapper.writeValue(fichero, objetos);
     }
-    public <T> List<T> devolverPuntas() throws JsonParseException, JsonMappingException, IOException{
-    	 List<T> puntas = mapper.readValue(fichero, new TypeReference<List<Puntas>>() {});
-    	 return puntas;
+    public <T> List<T> devolverObjetos(TypeReference<List<T>> hola) throws JsonParseException, JsonMappingException, IOException{	
+    	 List<T> objetos = mapper.readValue(fichero, hola);
+    	 return objetos;
     }
 }

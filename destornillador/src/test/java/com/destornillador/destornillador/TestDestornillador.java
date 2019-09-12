@@ -1,6 +1,10 @@
 package com.destornillador.destornillador;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -20,7 +24,9 @@ import org.junit.runner.RunWith;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @RunWith(JUnitParamsRunner.class)
@@ -38,19 +44,38 @@ public class TestDestornillador {
 
     @Test
     @Parameters(method = "parametersToTestAdd")
-    public void tipoTest(List<Integer> puntas) {
-    	System.out.println(puntas);
-        //destornillador.cambiarPunta(punta);
-        //assertThat(destornillador.tipoDePunta()).isEqualTo("Estrella");
+    public void tipoTest(Puntas punta) {
+    	//System.out.println(punta);
+    	destornillador.cambiarPunta(punta);
+    	System.out.println(destornillador.tipoDePunta());
+    	assertThat(punta.getClass().getSimpleName()).isEqualTo(destornillador.tipoDePunta());
     }
-
-    private Object[] parametersToTestAdd() throws  IOException  {
-       
-       List<Puntas> puntasDev = crearListaPuntas();
-        //List<Puntas> puntas = App.mapper.readValue(App.fichero,new TypeReference<List<Puntas>>() {});
-        return new Object[] {
-                puntasDev
-        };
+    
+    @Test
+    @Parameters(method = "parametersToTestAdd")
+    public void mockTest(Puntas punta) {
+    	//System.out.println(punta);
+    	destornillador = mock(Destornillador.class);
+    	destornillador.cambiarPunta(punta);
+    	destornillador.atornillar();
+    	destornillador.atornillar();
+    	verify(destornillador, times(2)).atornillar();
+    }
+    @Test
+    @Parameters(method = "parametersToTestAdd")
+    public void whenTest(Puntas punta) {
+    	//System.out.println(punta);
+    	
+    	destornillador = mock(Destornillador.class);
+    	destornillador.cambiarPunta(punta);
+    	when(destornillador.atornillar()).thenReturn("Atornillado");
+    	assertThat(destornillador.atornillar()).isEqualTo("Atornillado");
+    }
+    
+    private Collection<Puntas> parametersToTestAdd() throws  IOException  {
+    	List<Puntas> puntasDev = new ArrayList<Puntas>();
+    	puntasDev= crearListaPuntas();
+    	return puntasDev;
     }
 
     @Test
@@ -67,7 +92,9 @@ public class TestDestornillador {
         clases.add(Estrella.class);
         clases.add(Plano.class);
         datos.escribirEnJson(puntas,clases);
-        return datos.devolverPuntas();
+        TypeReference<List<Puntas>> tipo = new TypeReference<List<Puntas>>() {};
+        
+        return datos.devolverObjetos(tipo);
     }
 
 }
