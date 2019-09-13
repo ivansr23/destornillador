@@ -19,7 +19,7 @@ public @Data class Puntas {
     private Double dimension;
     @JsonProperty
     private String materia;
-
+    
     public static <Z> Z hola(Z objeto) {
         Z hola = objeto;
         return hola;
