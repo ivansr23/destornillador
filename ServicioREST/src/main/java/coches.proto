@@ -1,0 +1,11 @@
+package ServicioRest;
+option java_package = "com.trial.entities";
+
+option java_outer_classname = "CochesProto";
+
+message Coche{
+    required string marca = 1;
+    required int32 caballos = 2;
+    required int32 puertas = 3;
+
+}

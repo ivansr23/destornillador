@@ -1,6 +1,6 @@
 package com.destornillador.destornillador;
 
-public class Plano extends Puntas {
+public class Plano {
 	
 	public void soyPlano() {
 		System.out.println("Soy plano");

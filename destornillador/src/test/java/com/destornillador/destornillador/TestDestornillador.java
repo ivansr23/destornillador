@@ -79,8 +79,8 @@ public class TestDestornillador {
     public List<Puntas> crearListaPuntas() throws IOException {
         RecogerDatosJson datos = new RecogerDatosJson();
         List<Puntas> puntas = new ArrayList<Puntas>();
-        puntas.add(new Estrella());
-        puntas.add(new Plano());
+//        puntas.add(new Estrella());
+//        puntas.add(new Plano());
         Collection<Class<?>> clases = new ArrayList<Class<?>>();
         clases.add(Estrella.class);
         clases.add(Plano.class);

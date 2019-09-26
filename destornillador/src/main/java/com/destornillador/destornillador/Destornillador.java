@@ -21,7 +21,7 @@ public class Destornillador<T extends Puntas> {
         else
             System.out.println("No es un tipo Punta..");
     }
- 
+
     
     public static <T> T hola(T objeto) {
     	T hola = objeto;
