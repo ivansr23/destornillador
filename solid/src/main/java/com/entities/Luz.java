@@ -1,4 +1,13 @@
 package com.entities;
 
-public class Luz {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Value;
+
+@AllArgsConstructor
+@Value
+public @Data class Luz {
+
+    private Boolean encendido;
+
 }
