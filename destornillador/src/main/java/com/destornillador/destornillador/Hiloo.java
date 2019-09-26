@@ -1,18 +1,18 @@
 package com.destornillador.destornillador;
 
+import com.destornillador.destornillador.PruebaHilo.PruebaHiloBuilder;
+
 import lombok.AllArgsConstructor;
-import java.util.concurrent.Callable;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PruebaHilo  implements Callable<Integer>  {
-
+public class Hiloo extends Thread{
     private Integer id;
-
-    /*@Override
+    
+    @Override
     public void run() {
         try {
             Thread.sleep(1000);
@@ -22,17 +22,6 @@ public class PruebaHilo  implements Callable<Integer>  {
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-    }*/
-
-    @Override
-    public Integer call() throws Exception {
-        int total = 0;
-        for(int i=0;i<5;i++) {
-          total+=i;
-          System.out.println("holaaaaaaaaaaa hilo");
-          Thread.sleep(300);
-        }
-        System.out.println("d"+Thread.currentThread().getName());
-        return total;
     }
+
 }

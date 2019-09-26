@@ -21,11 +21,12 @@ class RecogerDatosJson {
     <T> void escribirEnJson(List<T> objetos, Collection<Class<?>> clases)
             throws JsonGenerationException, JsonMappingException, IOException {
         mapper.registerSubtypes(clases);
-
         mapper.writeValue(fichero, objetos);
     }
-    //type reference camibiar por clase,estandarizar mas
-    <T> List<T> devolverObjetos(TypeReference<List<T>> tipo)
+
+    //patron singleton
+    //Evitar tener el TypeReference
+    public <T> List<T> devolverObjetos(TypeReference<List<T>> tipo)
             throws JsonParseException, JsonMappingException, IOException {
         List<T> objetos = mapper.readValue(fichero, tipo);
         return objetos;

@@ -14,9 +14,17 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.categories.Categories;
+import org.junit.experimental.categories.Categories.IncludeCategory;
+import org.junit.experimental.categories.Category;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
+import org.junit.runners.Suite.SuiteClasses;
 
+import com.destornillador.destornillador.TestDestornillador.FastTests;
+import com.destornillador.destornillador.TestDestornillador.SlowTests;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import junitparams.JUnitParamsRunner;
@@ -33,7 +41,9 @@ public class TestDestornillador {
         System.out.println("Este es el nombre del test '" + testName.getMethodName() + "'");
         destornillador = new Destornillador<Puntas>();
     }
-
+    public interface FastTests { /* category marker */ }
+    public interface SlowTests { /* category marker */ }
+    
     @Test
     @Parameters(method = "parametersToTestAdd")
     public void tipoTest(Puntas punta) {
@@ -74,6 +84,7 @@ public class TestDestornillador {
     @Test
     public void noTienePuntaTest() {
         assertThat(destornillador.tipoDePunta()).isNull();
+        assertThat(true).isFalse();
     }
 
     public List<Puntas> crearListaPuntas() throws IOException {
@@ -90,5 +101,6 @@ public class TestDestornillador {
 
         return datos.devolverObjetos(tipo);
     }
+
 
 }
